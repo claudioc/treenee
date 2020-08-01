@@ -1,0 +1,124 @@
+<style>
+  .the-graph {
+    border: 1px solid #13540c;
+    border-radius: 5px;
+    padding: 20px;
+    position: relative;
+  }
+
+  .node-info {
+    background-color: #f1f1f1;
+    border: 1px solid #13540c;
+    color: #13540c;
+    display: none;
+    font-size: 70%;
+    left: 0;
+    overflow: hidden;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    width: 40%;
+  }
+
+  .node-info img {
+    max-height: 100px;
+    max-width: 50%;
+  }
+
+  .node-info .node-info-close {
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+  }
+
+  .node-info * {
+    margin-top: 0;
+  }
+</style>
+
+<div class="the-graph">
+  <div class="mermaid">{{graphDefinition}}</div>
+  <div class="node-info">
+    <span class="node-info-close">&#x2573;</span>
+    <div class="node-info-content"></div>
+  </div>
+
+  <script src="/public/mermaid/mermaid.min.js"></script>
+  <script>
+    (() => {
+      // We'll fetch each node's data only once
+      let treeCache = null;
+
+      // Elements in the page
+      let theGraph = document.querySelector('.the-graph');
+      let nodeInfo = theGraph.querySelector('.node-info');
+      let nodeInfoContent = nodeInfo.querySelector('.node-info-content');
+      let nodeInfoClose = nodeInfo.querySelector('.node-info-close');
+
+      // These ones are read on every click
+      let clickTargetBounds = null;
+      let graphBounds = null;
+
+      window.Treenee_graphClickHandler = async nodeId => {
+        nodeInfoContent.innerHTML = '';
+        const tree = treeCache || (await (await fetch('/tree/{{tree._meta.slug}}.json')).json());
+        treeCache = tree;
+        const node = tree.nodes.find(node => node.id === nodeId);
+        if (!node) {
+          return;
+        }
+
+        // Show the dialog with the information for the node.
+        graphBounds = theGraph.getBoundingClientRect();
+        nodeInfoContent.innerHTML =
+          ((node.body && node.title + '<hr>' + node.body) || node.title + '<hr>') +
+          ((node.prompt && '<hr>' + node.prompt) || '');
+        nodeInfo.style.display = 'block';
+        nodeInfo.style.left = clickTargetBounds.left - graphBounds.left - 4;
+        nodeInfo.style.top = clickTargetBounds.top - graphBounds.top + clickTargetBounds.height + 5;
+      };
+
+      theGraph.addEventListener('mousedown', evt => {
+        clickTargetBounds = evt.target.getBoundingClientRect();
+      });
+
+      theGraph.addEventListener('dblclick', evt => {
+        nodeInfo.style.display = 'none';
+      });
+
+      nodeInfoClose.addEventListener('click', evt => {
+        nodeInfo.style.display = 'none';
+      });
+
+      const themeCSS = `
+    .node .treenee-node-id {
+      background-color: #13540c;
+      border-radius: 20%;
+      color: white;
+      font-size: 80%;
+      opacity: 0.8;
+      padding: 0 3px;
+    }
+    .node.clickable div:hover { text-decoration: underline }
+    `;
+
+      const config = {
+        startOnLoad: true,
+        theme: 'forest',
+        themeCSS,
+        arrowMarkerAbsolute: true,
+        flowchart: {
+          useMaxWidth: true,
+          htmlLabels: true,
+          curve: 'basis',
+          nodeSpacing: '25',
+          rankSpacing: '75'
+        },
+        securityLevel: 'loose'
+      };
+
+      mermaid.initialize(config);
+    })();
+  </script>
+</div>

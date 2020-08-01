@@ -1,0 +1,141 @@
+@import 'normalize.css';
+
+html {
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  color: #444;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+header {
+  color: #abceef;
+  font-size: 1rem;
+  padding: 1rem;
+  text-align: right;
+}
+
+footer {
+  min-height: 4rem;
+}
+
+main {
+  padding: 0 5vw;
+  margin: 0 auto;
+  max-width: 50rem;
+}
+
+.content {
+  margin-bottom: 2rem;
+}
+
+.content h1 {
+  border-bottom: 1px solid #abceef;
+  font-weight: normal;
+  margin-top: 0;
+  padding: 1rem;
+  padding-left: 0;
+}
+
+.content h2 {
+  font-weight: normal;
+}
+
+.nav {
+  border-top: 1px solid #abcdef;
+  text-align: right;
+}
+
+.nav a {
+  color: #4e6a94;
+  font-weight: bold;
+}
+
+.nav a:hover {
+  color: #d6dde9;
+}
+
+.node .prompt {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.nav,
+.node .options {
+  padding: 0;
+}
+
+.nav li {
+  display: inline-block;
+  list-style-type: none;
+  margin-right: 0.5rem;
+}
+
+.node .options li {
+  display: block;
+  list-style-type: none;
+  margin-bottom: 1rem;
+}
+
+.tree .start a,
+.node .options li span,
+.node .options li a {
+  background-color: #d6dde9;
+  border-bottom: 2px solid transparent;
+  color: #4e6a94;
+  display: inline-block;
+  min-width: 20rem;
+  padding: 1rem;
+  text-decoration: none;
+}
+
+.node .options li span {
+  background-color: silver;
+  color: gray;
+}
+
+.tree .start a:hover,
+.node .options li a:hover {
+  border-bottom: 2px solid #4e6a94;
+}
+
+form .input {
+  display: inline-block;
+}
+
+.error {
+  color: red;
+}
+
+.tree .start {
+  text-align: center;
+}
+
+.tree .start a {
+  background-color: #b1e267;
+  color: #517817;
+  text-transform: uppercase;
+  min-width: 10rem;
+}
+
+.tree .start a:hover {
+  border-bottom-color: #517817;
+}
+
+.notice {
+  background-color: #f8f09a;
+  padding: 1rem;
+}
+
+.start-again {
+  text-align: right;
+}

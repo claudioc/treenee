@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "port": {
+      "type": "integer"
+    },
+    "cookiePassword": {
+      "type": "string"
+    },
+    "logRequests": {
+      "description": "Wether you want full logging capability or not (default is false)",
+      "type": "boolean"
+    },
+    "trees": {
+      "properties": {
+        "location": {
+          "type": "string"
+        },
+        "exclude": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "showGraph": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "custom": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "index": {
+          "required": ["title"],
+          "properties": {
+            "title": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

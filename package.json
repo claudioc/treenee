@@ -1,0 +1,40 @@
+{
+  "name": "treenee",
+  "version": "1.0.0",
+  "description": "A simple decision tree engine",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava -w",
+    "start": "nodemon index",
+    "start-dev": "nodemon index --build-mode"
+  },
+  "author": "claudio.cicali@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "@hapi/boom": "^7.4.2",
+    "@hapi/hapi": "^18.4.1",
+    "@hapi/inert": "^5.2.0",
+    "@hapi/joi": "^15.0.3",
+    "@hapi/vision": "^5.5.2",
+    "@hapi/yar": "^9.2.0",
+    "ajv": "^6.12.3",
+    "commander": "^5.1.0",
+    "comment-json": "^3.0.2",
+    "flat": "^5.0.0",
+    "hapi-pino": "^8.0.0",
+    "hbs": "^4.1.1",
+    "lodash": "^4.17.19",
+    "mermaid": "^8.5.0"
+  },
+  "devDependencies": {
+    "ava": "^3.10.1",
+    "nodemon": "^2.0.3"
+  },
+  "ava": {
+    "verbose": true,
+    "serial": true,
+    "files": [
+      "tests/**/*"
+    ]
+  }
+}

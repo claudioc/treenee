@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "This is the schema for the Tree structure definition",
+  "type": "object",
+  "definitions": {
+    "nodes": {
+      "type": "array",
+      "items": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "options": {
+            "$ref": "#/definitions/options"
+          }
+        },
+        "additionalProperties": false,
+        "required": ["id", "title"]
+      }
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "nextNodeId": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false,
+        "required": ["text", "nextNodeId"]
+      }
+    }
+  },
+  "properties": {
+    "_meta": {
+      "type": "object"
+    },
+    "name": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "accessCode": {
+      "type": "string"
+    },
+    "startNodeId": {
+      "description": "Identifier of the first node to show. Defaults to the first in the node list",
+      "type": "string"
+    },
+    "trackVisits": {
+      "description": "Wether to detect if a node has already been visited or not. Using 'value' in this case would be pointless. Default true",
+      "type": "boolean"
+    },
+    "nodes": {
+      "$ref": "#/definitions/nodes"
+    }
+  },
+  "additionalProperties": false,
+  "required": ["name", "title", "nodes"]
+}
