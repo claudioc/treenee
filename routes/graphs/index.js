@@ -1,6 +1,7 @@
 'use strict';
 
 const validateCode = require('../../lib/validate-code');
+const isURLLike = require('../../lib/is-url-like');
 
 module.exports = [
   {
@@ -55,10 +56,9 @@ function graphsTree(req, h) {
     }
 
     node.options.forEach(option => {
-      const label = makeLabel(tree, option.nextNodeId);
-      graphDefinition.push(
-        `${node.id} --> |"${clean(option.text)}"| ${option.nextNodeId}(${label})`
-      );
+      const label = makeLabel(tree, option.onSelect);
+      const target = isURLLike(option.onSelect) ? 'https://…' : option.onSelect;
+      graphDefinition.push(`${node.id} --> |"${clean(option.text)}"| ${target}(${label})`);
     });
   });
 
@@ -72,9 +72,12 @@ function graphsTree(req, h) {
   });
 }
 
-function makeLabel(tree, nodeId, title) {
-  const cleanTitle = clean(title ? title : findNodeTitle(tree, nodeId));
-  return `"<span class='treenee-node-id'>${nodeId}</span>&nbsp;&nbsp;${cleanTitle}&nbsp;"`;
+function makeLabel(tree, onSelect, title) {
+  if (isURLLike(onSelect)) {
+    return 'https://…';
+  }
+  const cleanTitle = clean(title ? title : findNodeTitle(tree, onSelect));
+  return `"<span class='treenee-node-id'>${onSelect}</span>&nbsp;&nbsp;${cleanTitle}&nbsp;"`;
 }
 
 function findNodeTitle(tree, nodeId) {

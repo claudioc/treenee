@@ -5,30 +5,37 @@
     <p>{{{ node.body }}}</p>
     {{#if previousVisit}}
     <p class="notice">&#9888; You already selected an option for this prompt.</p>
-    {{/if}} {{#if node.options}}
+    {{/if}}
+    {{#if node.options}}
     <p class="prompt">{{ node.prompt }}</p>
     <ul class="options">
-      {{#each node.options}} {{#if ../previousVisit}} {{#if (eq _id ../previousVisit.optionId)}}
-      <li>
-        <a href="/tree/{{ ../tree._meta.slug }}/{{ nextNodeId }}?p={{ ../node.id }}&o={{ _id }}"
-          >{{{ text }}}</a
-        >
-      </li>
-      {{else}}
-      <li>
-        <span>{{{ text }}}</span>
-      </li>
-      {{/if}} {{else}}
-      <li>
-        <a href="/tree/{{ ../tree._meta.slug }}/{{ nextNodeId }}?p={{ ../node.id }}&o={{ _id }}"
-          >{{{ text }}}</a
-        >
-      </li>
-      {{/if}} {{/each}}
+      {{#each node.options}}
+        {{#if ../previousVisit}}
+          {{#if (eq _id ../previousVisit.optionId)}}
+          <li>
+            {{#if (is-url onSelect)}}
+            <a href="{{onSelect}}">{{{ text }}}</a>
+            {{else}}
+            <a href="/tree/{{ ../tree._meta.slug }}/{{ onSelect }}?p={{ ../node.id }}&o={{ _id }}">{{{ text }}}</a>
+            {{/if}}
+          </li>
+          {{else}}
+          <li><span>{{{ text }}}</span></li>
+          {{/if}}
+        {{else}}
+        <li>
+          {{#if (is-url onSelect)}}
+          <a href="{{onSelect}}">{{{ text }}}</a>
+          {{else}}
+          <a href="/tree/{{ ../tree._meta.slug }}/{{ onSelect }}?p={{ ../node.id }}&o={{ _id }}">{{{ text }}}</a>
+          {{/if}}
+        </li>
+        {{/if}}
+      {{/each}}
     </ul>
     {{else}}
     <p class="start-again">
-      You reached the end: <a href="/tree/{{ tree._meta.slug }}">start again</a>?
+      You reached the end; <a href="/tree/{{ tree._meta.slug }}">start again</a>?
     </p>
     {{/if}}
   </section>

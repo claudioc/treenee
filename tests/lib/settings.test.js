@@ -5,7 +5,7 @@ const settings = require('../../lib/settings');
 
 test('Should load configuration from a passed object', async t => {
   const data = settings.loadFrom();
-  t.is(Object.keys(data).length, 4);
+  t.is(Object.keys(data).length, 5);
 });
 
 test('Should change default values', async t => {

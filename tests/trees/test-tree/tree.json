@@ -13,7 +13,8 @@
       "options": [
         {
           "text": "Yes!",
-          "nextNodeId": "start",
+          "nextNodeId": "start-deprecated",
+          "onSelect": "start",
           "value": 0
         },
         {
