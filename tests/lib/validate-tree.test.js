@@ -5,10 +5,11 @@ const path = require('path');
 const findTrees = require('../../lib/read-trees');
 const validateTree = require('../../lib/validate-tree');
 const _cloneDeep = require('lodash/cloneDeep');
+const normalizeTree = require('../../lib/normalize-tree');
 
 test('Should validate a valid tree', async t => {
-  const trees = await findTrees(path.join(__dirname, '../trees'));
-  validateTree(trees[0]);
+  const tree = await getTestTree();
+  validateTree(tree);
   t.pass();
 });
 
@@ -57,7 +58,7 @@ test('Should validate an invalid tree 8', async t => {
 
 test('Should validate an invalid tree 12', async t => {
   const tree = await getTestTree();
-  tree.nodes[1].options[0].nextNodeId = '1000';
+  tree.nodes[1].options[0].onSelect = '1000';
   const err = t.throws(() => {
     validateTree(tree);
   });
@@ -66,5 +67,5 @@ test('Should validate an invalid tree 12', async t => {
 
 async function getTestTree() {
   const trees = await findTrees(path.join(__dirname, '../trees'));
-  return _cloneDeep(trees[0]);
+  return normalizeTree(_cloneDeep(trees[0]));
 }

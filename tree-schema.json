@@ -38,6 +38,11 @@
             "type": "string"
           },
           "nextNodeId": {
+            "description": "This is deprecated in favour of onSelect (Aug 2020)",
+            "type": "string"
+          },
+          "onSelect": {
+            "description": "The id of another node or just a URL",
             "type": "string"
           },
           "value": {
@@ -45,7 +50,7 @@
           }
         },
         "additionalProperties": false,
-        "required": ["text", "nextNodeId"]
+        "required": ["text", "onSelect"]
       }
     }
   },

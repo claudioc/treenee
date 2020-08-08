@@ -11,3 +11,11 @@ test('Should normalize node ids', async t => {
   const tree = normalizeTree(trees[0]);
   t.is(tree.nodes[0].id, '123');
 });
+
+test('Should normalize options onSelect', async t => {
+  const trees = await findTrees(path.join(__dirname, '../trees'));
+  const tree = normalizeTree(trees[0]);
+  t.is(tree.nodes[0].options[0].onSelect, 'start');
+  t.is(tree.nodes[0].options[0].nextNodeId, 'start');
+  t.is(tree.nodes[0].options[1].onSelect, '2');
+});

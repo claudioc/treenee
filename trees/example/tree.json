@@ -14,13 +14,15 @@
       "options": [
         {
           "text": "Yes it is!",
-          "nextNodeId": "mission-critical",
-          "value": 0
+          "onSelect": "mission-critical"
         },
         {
           "text": "No, it's just a demo",
-          "nextNodeId": "demo-application",
-          "value": 0
+          "onSelect": "demo-application"
+        },
+        {
+          "text": "Get me out of here!",
+          "onSelect": "https://reddit.com"
         }
       ]
     },
@@ -32,17 +34,17 @@
       "options": [
         {
           "text": "From 0 to 10",
-          "nextNodeId": "javascript",
+          "onSelect": "javascript",
           "value": 0
         },
         {
           "text": "From 11 to 100",
-          "nextNodeId": "javascript",
+          "onSelect": "javascript",
           "value": 0
         },
         {
           "text": "More than 100!",
-          "nextNodeId": "javascript",
+          "onSelect": "javascript",
           "value": 0
         }
       ]
@@ -55,18 +57,15 @@
       "options": [
         {
           "text": "Functional programming",
-          "nextNodeId": "python",
-          "value": 0
+          "onSelect": "python"
         },
         {
           "text": "Object oriented programming",
-          "nextNodeId": "python",
-          "value": 0
+          "onSelect": "python"
         },
         {
           "text": "Magic with cards",
-          "nextNodeId": "python",
-          "value": 0
+          "onSelect": "python"
         }
       ]
     },
