@@ -1,0 +1,30 @@
+---
+name: A test tree
+title: A test tree
+description: Some description for the test tree
+accessCode: secret!
+startNodeId: start
+nodes:
+- id: start
+  title: You Ready?
+  body: Let's go!
+  prompt: Are you ready for this test?
+  options:
+  - text: Yes!
+    nextNodeId: start-deprecated
+    onSelect: start
+    value: 0
+  - text: 'No'
+    nextNodeId: '2'
+    value: 0
+- id: '2'
+  title: You Goofy?
+  body: Let's go!
+  prompt: Are you goofy for this test?
+  options:
+  - text: Yes!
+    nextNodeId: start
+    value: 0
+  - text: 'No'
+    nextNodeId: '2'
+    value: 0
