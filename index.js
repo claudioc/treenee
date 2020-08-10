@@ -26,7 +26,7 @@ const init = async () => {
     .version(pkg.version)
     .option('-s, --settings <path>', 'Location of the settings.json file (defaults to cwd)')
     .option('--sample-settings', 'Dumps a settings file template and exits')
-    .option('--sample-tree', 'Dumps a JSON template for a new tree')
+    .option('--sample-tree', 'Dumps a super simple YAML template for a new tree')
     .option('--build-mode', 'Bypass trees validation (Warning: can crash the program)')
     .option(
       '--dry-run',
@@ -40,7 +40,7 @@ const init = async () => {
   }
 
   if (program.sampleTree) {
-    console.log(settings.getTreeTemplateAsJSON());
+    console.log(settings.getTreeTemplateAsYAML());
     process.exit(0);
   }
 

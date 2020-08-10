@@ -8,12 +8,11 @@ A demo server with the default installation is available at [Treenee.com](https:
 
 ## Features (and limits)
 
-- no database needed; all tree definitions are just JSON file (one file for each tree)
+- no database needed; all tree definitions are just YAML file (one file for each tree, in case you need to serve more than one)
 - no login, no registration; access to the application is always anonymous (see below for a discussion about [security](#security))
 - trees can be made "private" with a code, to make them accessible only to people who know that code. The code is requested in the home page
 - each answer can be given a "value" which is added until the end so that each user can get a "score" (read more in the [Score section](#score) below)
 - optionally, a person can only visit a node once (option `trackVisits`, which defaults to `false`); going back and forth the nodes with the browser's capabilities is fully handled
-- all JSON files used by the App can contain JavaScript comments
 - many validating checks are performed on the inputs to ensure the trees are consistent and robust
 - a cookie is used to maintain track of the session data
 - the JSON schema for the tree definition is provided in `tree-schema.json`
@@ -44,7 +43,7 @@ You probably want to be able to configure some of the aspects of the application
 
 Each configuration option meaning is described in the settings.json template file.
 
-If you want to create a sample tree, run `node index --sample-tree` to output a JSON that you can use as a starting point.
+If you want to create a sample tree, run `node index --sample-tree` to output a YAML that you can use as a starting point.
 
 ## Security
 
