@@ -4,7 +4,7 @@
     <h2>{{ node.title }}</h2>
     <p>{{{ node.body }}}</p>
     {{#if previousVisit}}
-    <p class="notice">&#9888; You already selected an option for this prompt.</p>
+    <p class="notice">{{t "node_1"}}</p>
     {{/if}}
     {{#if node.options}}
     <p class="prompt">{{ node.prompt }}</p>
@@ -35,22 +35,22 @@
     </ul>
     {{else}}
     <p class="start-again">
-      You reached the end; <a href="/tree/{{ tree._meta.slug }}">start again</a>?
+      {{t "node_2"}} <a href="/tree/{{ tree._meta.slug }}">{{t "node_3"}}</a>
     </p>
     {{/if}}
   </section>
 
   <section class="nav">
     <ul>
-      <li><a href="/">Home</a></li>
-      <li><a onclick="window.history.back()" href="#">Back</a></li>
+      <li><a href="/">{{t "shared_1"}}</a></li>
+      <li><a onclick="window.history.back()" href="#">{{t "shared_2"}}</a></li>
       {{#if node.options}}
-      <li><a href="/tree/{{ tree._meta.slug }}">Abort and restart</a></li>
+      <li><a href="/tree/{{ tree._meta.slug }}">{{t "shared_3"}}</a></li>
       {{/if}}
     </ul>
   </section>
   {{#if score}}
   <hr />
-  <p>Final score: {{ score }}</p>
+  <p>{{t "node_4"}} {{ score }}</p>
   {{/if}}
 </div>

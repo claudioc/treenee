@@ -17,7 +17,7 @@ A demo server with the default installation is available at [Treenee.com](https:
 - a cookie is used to maintain track of the session data
 - the JSON schema for the tree definition is provided in `tree-schema.json`
 - the JSON schema for the settings is provided in `settings-schema.json`
-- graph visualization of each tree is implemented using (using [Mermaid](https://mermaid-js.github.io/))
+- (optional) graph visualization of each tree is implemented using (using [Mermaid](https://mermaid-js.github.io/))
 
 ## Installation (for development)
 
@@ -44,6 +44,13 @@ You probably want to be able to configure some of the aspects of the application
 Each configuration option meaning is described in the settings.json template file.
 
 If you want to create a sample tree, run `node index --sample-tree` to output a YAML that you can use as a starting point.
+
+## Translations
+
+All the strings used by the Treenee user interface can be translated (or just changed
+from their default value). To do so, use the `settings.json` file (see above the [Configuration](#configuration) section), and work on the `strings` object in it.
+
+Hint: for the sake of self-documenting, and to simplify debugging translation issues, each string in the final HTML is wrapped within a `<span>` with a class having the same name then the key used for translation.
 
 ## Security
 

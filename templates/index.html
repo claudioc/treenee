@@ -1,24 +1,27 @@
 <div class="trees">
   <section class="content">
-    <h1>{{c_settings.custom.index.title}}</h1>
-    <div class="body">Available tree(s)</div>
+    <h1>{{t "index_1"}}</h1>
+    <div class="body">{{t "index_2"}}</div>
     <ul>
-      {{#each c_trees}} {{#if _meta.isPublic}}
-      <li>
-        <a href="/tree/{{ _meta.slug }}">{{ title }}</a>
-      </li>
-      {{/if}} {{/each}}
+      {{#each c_trees}}
+        {{#if _meta.isPublic}}
+        <li>
+          <a href="/tree/{{ _meta.slug }}">{{ title }}</a>
+        </li>
+        {{/if}}
+      {{/each}}
     </ul>
   </section>
   <section>
     {{#if error}}
     <p class="error">{{ error }}</p>
-    {{/if}} {{#if c_trees._meta.privateCount}}
-    <p>Enter the code of any private tree you want to access</p>
+    {{/if}}
+    <p>{{t "index_3"}}</p>
     <form action="/code" method="POST">
       <div class="input"><input autofocus type="text" name="accessCode" /></div>
-      <div class="input"><input type="submit" value="Access" /></div>
+      <div class="input"><input type="submit" value="{{t key="index_4" withSpan=false}}" /></div>
     </form>
+    {{#if c_trees._meta.privateCount}}
     {{/if}}
   </section>
 </div>
