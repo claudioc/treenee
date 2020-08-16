@@ -6,7 +6,7 @@
   "scripts": {
     "test": "ava -w",
     "start": "nodemon index",
-    "start-dev": "nodemon index --build-mode"
+    "start-dev": "nodemon index --builder-mode --watch-trees --stable-ids"
   },
   "author": "claudio.cicali@gmail.com",
   "license": "MIT",
@@ -25,6 +25,7 @@
     "hbs": "^4.1.1",
     "js-yaml": "^3.14.0",
     "lodash": "^4.17.19",
+    "markdown-it": "^11.0.0",
     "mermaid": "^8.5.0"
   },
   "devDependencies": {

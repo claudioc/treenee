@@ -16,12 +16,12 @@
     {{#if error}}
     <p class="error">{{ error }}</p>
     {{/if}}
+    {{#if c_trees._meta.privateCount}}
     <p>{{t "index_3"}}</p>
     <form action="/code" method="POST">
       <div class="input"><input autofocus type="text" name="accessCode" /></div>
       <div class="input"><input type="submit" value="{{t key="index_4" withSpan=false}}" /></div>
     </form>
-    {{#if c_trees._meta.privateCount}}
     {{/if}}
   </section>
 </div>

@@ -1,21 +1,25 @@
 # This is the definition of the example tree (and this is
 # how you write comments)
 ---
-name: "An example decision tree!"
+name: "An example decision tree"
 title: "How to select the best programming language"
 description: "Let me help you selecting the best programming language"
 accessCode: ""
-startNodeId: "start"
+startNodeId: start
 trackVisits: true
+bodyFormat: html
 nodes:
 - id: "start"
   title: "Understanding your needs"
 # As you can see HTML is fully supported.
-# The symbol ">" next to "body" is very important and must be kept as it is
-  body: >
+# The symbol "|" next to "body" is very important and must be kept as it is
+  body: |
     This is the <strong>first</strong> question.
-    <p>
     Please consider answering the following question:
+    trwert
+    <p>
+    rwerwer
+    werwer
   prompt: "Is your application mission critical?"
   options:
   - text: "Yes it is!"

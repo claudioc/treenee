@@ -20,6 +20,7 @@ const treeRoute = require('./routes/tree');
 const nodeRoute = require('./routes/node');
 const graphsRoute = require('./routes/graphs');
 const readTrees = require('./lib/read-trees');
+const { watch } = require('fs');
 
 const init = async () => {
   program
@@ -27,7 +28,26 @@ const init = async () => {
     .option('-s, --settings <path>', 'Location of the settings.json file (defaults to cwd)')
     .option('--sample-settings', 'Dumps a settings file template and exits')
     .option('--sample-tree', 'Dumps a super simple YAML template for a new tree')
-    .option('--build-mode', 'Bypass trees validation (Warning: can crash the program)')
+    .option(
+      '--no-stable-ids',
+      'Option Ids are randomly generated at each servere restart (default)'
+    )
+    .option('--stable-ids', 'Option Ids are generated in a stable way', false)
+    .option(
+      '--no-watch-trees',
+      'Do not reload the tree definition when they change (requires a server restart, default)'
+    )
+    .option(
+      '--watch-trees',
+      'Watch changes to the tree definitions and reload them when they change',
+      false
+    )
+    .option('--no-builder-mode', 'Perform full validation of the trees (default)')
+    .option(
+      '--builder-mode',
+      'Bypass trees data validation and only perform schema validation (Warning: can crash the program)',
+      false
+    )
     .option(
       '--dry-run',
       'Do not start the server but just attempt to load the configuration and the trees'
@@ -96,19 +116,43 @@ const init = async () => {
       logRequestComplete: appSettings.logRequests
     }
   });
-
-  let trees;
+  const validateTreeData = !program.builderMode;
   const treesLocation = path.resolve(appSettings.trees.location);
-  try {
-    trees = await readTrees(treesLocation, appSettings.trees.exclude, !!program.buildMode);
-  } catch (err) {
-    server.log('error', err.message);
-    process.exit(1);
-  }
+  const trees = await findTreesOrDie(
+    server,
+    appSettings,
+    treesLocation,
+    validateTreeData,
+    program.stableIds
+  );
 
-  if (trees.length === 0) {
-    server.log('error', 'No usable trees found.');
-    process.exit(1);
+  server.app.trees = trees;
+
+  if (program.watchTrees) {
+    let watchTask = 0;
+    watch(
+      treesLocation,
+      {
+        recursive: true
+      },
+      async () => {
+        if (watchTask) {
+          return;
+        }
+        watchTask = setTimeout(async () => {
+          const trees = await findTreesOrDie(
+            server,
+            appSettings,
+            treesLocation,
+            validateTreeData,
+            program.stableIds
+          );
+          server.app.trees = trees;
+          server.log('info', 'Reloading tree defition…');
+          watchTask = 0;
+        }, 100);
+      }
+    );
   }
 
   server.views({
@@ -136,8 +180,6 @@ const init = async () => {
   server.route(treeRoute);
   server.route(nodeRoute);
 
-  server.app.trees = trees;
-
   if (!program.dryRun) {
     await server.start();
     server.log(
@@ -146,6 +188,24 @@ const init = async () => {
     );
   }
 };
+
+async function findTreesOrDie(server, settings, treesLocation, validateTreeData, useStableIds) {
+  let trees;
+
+  try {
+    trees = await readTrees(treesLocation, settings.trees.exclude, validateTreeData, useStableIds);
+  } catch (err) {
+    server.log('error', err.message);
+    process.exit(1);
+  }
+
+  if (trees.length === 0) {
+    server.log('error', 'No usable trees found.');
+    process.exit(1);
+  }
+
+  return trees;
+}
 
 process.on('unhandledRejection', err => {
   console.log(err);
