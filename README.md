@@ -1,5 +1,7 @@
 # Treenee
 
+[![Build Status](https://travis-ci.org/claudioc/treenee.png?branch=master)](https://travis-ci.org/claudioc/treenee)
+
 Treenee is a web application made for presenting simple decision trees to humans; each "node" of the tree is supposed to show the user a prompt with several possible options to select from as the next step: upon selection, Treenee will render the corresponding node until the end of the tree, when a "next node" cannot be selected anymore.
 
 The last node of the tree also doesn't contain any further options but usually shows a page with further instructions, a result, or anything you can think of it may come as a "final decision", so to speak.
@@ -8,10 +10,10 @@ A demo server with the default installation is available at [Treenee.com](https:
 
 ## Features (and limits)
 
-- Database not needed; all tree definitions are just YAML file (one file for each tree, in case you need to serve more than one)
+- Database not needed; all tree definitions are just YAML files (one file for each tree, in case you need to serve more than one)
 - No login, no registration; access to the application is always anonymous (see below for a discussion about [security](#security))
 - Trees can be made "private" with a code, to make them accessible only to people who know that code. The code is requested in the home page
-- Three rendering mode for the pages: html, markdown and text (no formatting)
+- Three rendering modes for the pages: html, markdown and text (no formatting)
 - Each answer can be given a "value" which is added until the end so that each user can get a "score" (read more in the [Score section](#score) below)
 - Optionally, a person can only visit a node once (option `trackVisits`, which defaults to `false`); going back and forth the nodes with the browser's capabilities is fully handled
 - Many validating checks are performed on the inputs to ensure the trees are consistent and robust
