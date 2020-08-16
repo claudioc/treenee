@@ -78,9 +78,15 @@
       "description": "Wether to detect if a node has already been visited or not. Using 'value' in this case would be pointless. Default true",
       "type": "boolean"
     },
+    "bodyFormat": {
+      "description": "How to interpret the body: html (default), markdown or text",
+      "type": "string",
+      "enum": ["html", "markdown", "text"]
+    },
     "nodes": {
       "$ref": "#/definitions/nodes"
-    }
+    },
+    "additionalProperties": false
   },
   "additionalProperties": false,
   "required": ["name", "title", "nodes"]

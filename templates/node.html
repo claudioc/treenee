@@ -2,16 +2,34 @@
   <section class="content">
     <h1>{{ tree.title }}</h1>
     <h2>{{ node.title }}</h2>
-    <p>{{{ node.body }}}</p>
+    <div class="body">
+    {{#if (eq tree.bodyFormat "text")}}
+      {{ body }}
+    {{else}}
+      {{{ body }}}
+    {{/if}}
+    </div>
     {{#if previousVisit}}
-    <p class="notice">&#9888; You already selected an option for this prompt.</p>
+    <p class="notice">{{t "node_1"}}</p>
     {{/if}}
     {{#if node.options}}
-    <p class="prompt">{{ node.prompt }}</p>
-    <ul class="options">
-      {{#each node.options}}
-        {{#if ../previousVisit}}
-          {{#if (eq _id ../previousVisit.optionId)}}
+    <div class="options-container">
+      <p class="prompt">{{ node.prompt }}</p>
+      <ul class="options">
+        {{#each node.options}}
+          {{#if ../previousVisit}}
+            {{#if (eq _id ../previousVisit.optionId)}}
+            <li>
+              {{#if (is-url onSelect)}}
+              <a href="{{onSelect}}">{{{ text }}}</a>
+              {{else}}
+              <a href="/tree/{{ ../tree._meta.slug }}/{{ onSelect }}?p={{ ../node.id }}&o={{ _id }}">{{{ text }}}</a>
+              {{/if}}
+            </li>
+            {{else}}
+            <li><span>{{{ text }}}</span></li>
+            {{/if}}
+          {{else}}
           <li>
             {{#if (is-url onSelect)}}
             <a href="{{onSelect}}">{{{ text }}}</a>
@@ -19,38 +37,28 @@
             <a href="/tree/{{ ../tree._meta.slug }}/{{ onSelect }}?p={{ ../node.id }}&o={{ _id }}">{{{ text }}}</a>
             {{/if}}
           </li>
-          {{else}}
-          <li><span>{{{ text }}}</span></li>
           {{/if}}
-        {{else}}
-        <li>
-          {{#if (is-url onSelect)}}
-          <a href="{{onSelect}}">{{{ text }}}</a>
-          {{else}}
-          <a href="/tree/{{ ../tree._meta.slug }}/{{ onSelect }}?p={{ ../node.id }}&o={{ _id }}">{{{ text }}}</a>
-          {{/if}}
-        </li>
-        {{/if}}
-      {{/each}}
-    </ul>
+        {{/each}}
+      </ul>
+    </div>
     {{else}}
     <p class="start-again">
-      You reached the end; <a href="/tree/{{ tree._meta.slug }}">start again</a>?
+      {{t "node_2"}} <a href="/tree/{{ tree._meta.slug }}">{{t "node_3"}}</a>
     </p>
     {{/if}}
   </section>
 
   <section class="nav">
     <ul>
-      <li><a href="/">Home</a></li>
-      <li><a onclick="window.history.back()" href="#">Back</a></li>
+      <li><a href="/">{{t "shared_1"}}</a></li>
+      <li><a onclick="window.history.back()" href="#">{{t "shared_2"}}</a></li>
       {{#if node.options}}
-      <li><a href="/tree/{{ tree._meta.slug }}">Abort and restart</a></li>
+      <li><a href="/tree/{{ tree._meta.slug }}">{{t "shared_3"}}</a></li>
       {{/if}}
     </ul>
   </section>
   {{#if score}}
   <hr />
-  <p>Final score: {{ score }}</p>
+  <p>{{t "node_4"}} {{ score }}</p>
   {{/if}}
 </div>

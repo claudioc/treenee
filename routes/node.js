@@ -5,6 +5,10 @@ const validateCode = require('../lib/validate-code');
 const Joi = require('@hapi/joi');
 const Boom = require('@hapi/boom');
 const treeTools = require('../lib/tree-tools');
+const markdown = require('markdown-it')({
+  html: false,
+  typographer: true
+});
 
 const handler = (req, h) => {
   const tree = treeTools.findTreeBySlug(req.server.app.trees, req.params.slug);
@@ -67,12 +71,19 @@ const handler = (req, h) => {
     }, 0);
   }
 
+  let body = node.body;
+  if (tree.bodyFormat === 'markdown') {
+    console.log(body);
+    body = markdown.render(body);
+  }
+
   return (
     h
       .view('node', {
         previousVisit,
         score,
         node,
+        body,
         tree
       })
       // Instruct browsers to not cache these pages since we need to
