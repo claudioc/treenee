@@ -73,7 +73,6 @@ const handler = (req, h) => {
 
   let body = node.body;
   if (tree.bodyFormat === 'markdown') {
-    console.log(body);
     body = markdown.render(body);
   }
 
