@@ -1,5 +1,7 @@
 # Treenee
 
+[![Build Status](https://travis-ci.org/claudioc/treenee.png?branch=master)](https://travis-ci.org/claudioc/treenee)
+
 Treenee is a web application made for presenting simple decision trees to humans; each "node" of the tree is supposed to show the user a prompt with several possible options to select from as the next step: upon selection, Treenee will render the corresponding node until the end of the tree, when a "next node" cannot be selected anymore.
 
 The last node of the tree also doesn't contain any further options but usually shows a page with further instructions, a result, or anything you can think of it may come as a "final decision", so to speak.
