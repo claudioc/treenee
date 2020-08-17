@@ -1,3 +1,8 @@
+# Version 1.3.1 August 17th, 2020
+
+- Uses a custom slugify method
+- Fixes bugs on the translator
+
 # Version 1.3.0 August 15th, 2020
 
 - Added support for Markdown (in the node's body only) and text only (uses the new `bodyFormat` tree option)

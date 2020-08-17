@@ -11,7 +11,7 @@ module.exports = (options, context) => {
   } else {
     strings = context.data.root.c_settings.strings
   }
-  const string = strings ? (strings[key] || key) : key;
+  const string = strings ? (strings[key] !== undefined ? strings[key] : key) : key;
   const output = withSpan ? `<span class="__${key}__">${string}</span>` : string;
   return new Handlebars.SafeString(output);
 };
