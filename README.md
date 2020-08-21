@@ -11,7 +11,7 @@ A demo server with the default installation is available at [Treenee.com](https:
 ## Features (and limits)
 
 - Database not needed; all tree definitions are just YAML files (one file for each tree, in case you need to serve more than one)
-- No login, no registration; access to the application is always anonymous (see below for a discussion about [security](#security))
+- No logins, no registration; access to the application is always anonymous (see below for a discussion about [security](#security))
 - Trees can be made "private" with a code, to make them accessible only to people who know that code. The code is requested in the home page
 - Three rendering modes for the pages: html, markdown and text (no formatting)
 - Each answer can be given a "value" which is added until the end so that each user can get a "score" (read more in the [Score section](#score) below)
@@ -24,7 +24,15 @@ A demo server with the default installation is available at [Treenee.com](https:
 
 ## Installation (for development)
 
-`npm install` and then `npm start`. You can avoid tree validation (useful during the authoring of a new tree), running `npm run start-dev` or directly using the `--builder-mode` command line option (see [below](#builder-mode)).
+First of all `npm install` and then `npm start` (uses nodemon).
+
+If you run the server with `npm run start-dev`, then:
+
+- all changes in the tree configuration(s) are reloaded automatically
+- most of the validations on the trees are skipped (using the `--builder-mode` command line option, see [below](#builder-mode))
+- the ids are created stable, see [below](#node-ids)
+
+Tests are run either with `npm test` (for CI, doesn't watch changes) or `npm run test-dev`, which runs watching changes.
 
 In case you want to just validate the JSON trees definition and not run the server, you can run `node index.js --dry-run`.
 

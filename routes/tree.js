@@ -18,6 +18,17 @@ const handler = (req, h) => {
 
   req.yar.clear('visits');
 
+  const startUrl = `/tree/${tree._meta.slug}/${tree.startNodeId}`;
+  if (tree.showIntro) {
+    return h.view('tree', {
+      tree,
+      startUrl,
+      showGraph: req.server.settings.app.trees.showGraph
+    });
+  } else {
+    return h.redirect(startUrl);
+  }
+
   return h.view('tree', {
     tree,
     showGraph: req.server.settings.app.trees.showGraph
