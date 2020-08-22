@@ -1,10 +1,9 @@
-# Version 1.3.2 August 21th, 2020
+# Version 1.3.3 August 22th, 2020
 
-- Uses a more moern design
+- Uses a more modern design
 - Increases the font size
-- More documentation and the `test-dev` npm script
 
-# Version 1.3.2 August 21th, 2020
+# Version 1.3.2 August 21st, 2020
 
 - Adds the `showIntro` option for each tree
 - More documentation and the `test-dev` npm script
