@@ -1,14 +1,8 @@
 @import 'normalize.css';
 
-html {
-  box-sizing: border-box;
-  -webkit-text-size-adjust: 100%;
-}
-
-body {
-  color: #444;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+:root {
+  --background-color: rgb(245, 245, 245);
+  --secondary-color: rgb(200, 215, 229);
 }
 
 *,
@@ -17,9 +11,20 @@ body {
   box-sizing: inherit;
 }
 
-header {
-  color: #abceef;
-  font-size: 1rem;
+html {
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--background-color);
+  color: #444;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+}
+
+body > header {
+  background-color: var(--secondary-color);
   padding: 1rem;
   text-align: right;
 }
@@ -36,10 +41,11 @@ main {
 
 .content {
   margin-bottom: 2rem;
+  font-size: clamp(1rem, 4vw, 1.2rem);
 }
 
 .content h1 {
-  border-bottom: 1px solid #abceef;
+  border-bottom: 3px solid var(--secondary-color);
   font-weight: normal;
   margin-top: 0;
   padding: 1rem;
@@ -51,7 +57,7 @@ main {
 }
 
 .nav {
-  border-top: 1px solid #abcdef;
+  border-top: 3px solid var(--secondary-color);
   text-align: right;
 }
 
@@ -61,7 +67,7 @@ main {
 }
 
 .nav a:hover {
-  color: #d6dde9;
+  opacity: 0.7;
 }
 
 .node .prompt {
@@ -77,35 +83,54 @@ main {
 .nav li {
   display: inline-block;
   list-style-type: none;
-  margin-right: 0.5rem;
 }
 
 .node .options li {
   display: block;
   list-style-type: none;
   margin-bottom: 1rem;
+  background-color: rgb(255, 255, 255);
+  border-left: 4px solid transparent;
+  border-radius: 8px;
+  box-shadow: 0 0.125em 0.25em 0 rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+  margin-bottom: 1rem;
+  position: relative;
+  width: 80%;
+}
+
+.node .options li:not(.unselectable-option):hover {
+  border-left-color: rgb(72, 172, 152);
+}
+.node .options li:not(.unselectable-option)::after {
+  color: rgb(220, 220, 220);
+  content: '>';
+  font-size: 36px;
+  right: 16px;
+  position: absolute;
+  top: 0;
+}
+
+.node .options li a {
+  background-color: transparent;
+  color: rgb(100, 100, 100);
+  display: inline-block;
+  padding: 1rem;
+  width: 100%;
 }
 
 .tree .start a,
-.node .options li span,
 .node .options li a {
-  background-color: #d6dde9;
-  border-bottom: 2px solid transparent;
-  color: #4e6a94;
+  color: black;
   display: inline-block;
   min-width: 20rem;
-  padding: 1rem;
   text-decoration: none;
 }
 
-.node .options li span {
-  background-color: silver;
+.node .options li.unselectable-option {
+  background-color: rgb(210, 210, 210);
   color: gray;
-}
-
-.tree .start a:hover,
-.node .options li a:hover {
-  border-bottom: 2px solid #4e6a94;
+  padding: 1rem;
 }
 
 form .input {
