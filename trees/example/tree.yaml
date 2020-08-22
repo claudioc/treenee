@@ -15,12 +15,9 @@ nodes:
 # As you can see HTML is fully supported.
 # The symbol "|" next to "body" is very important and must be kept as it is
   body: |
-    This is the <strong>first</strong> question.
-    Please consider answering the following question:
-    trwert
+    First of all it's <em>important</em> to specify the scope of your application.
     <p>
-    rwerwer
-    werwer
+    For example:
   prompt: "Is your application mission critical?"
   options:
   - text: "Yes it is!"
@@ -32,7 +29,7 @@ nodes:
 
 - id: "mission-critical"
   title: "A mission critical application"
-  body: "A mission critical application needs a powerful language!"
+  body: "Since your application is mission critical, your need a powerful language!"
   prompt: "How much power do you need?"
   options:
   - text: "From 0 to 10"
