@@ -73,7 +73,7 @@ Each node can be configured to use a specific rendering mode for the main text i
 
 ## Security
 
-Treenee doesn't have any concept of "user" and it always runs anonimously; one (crypted) session cookie is used to just keep track of the scores during a tree navigation.
+Treenee doesn't have any concept of "user" and it always runs anonymously; one (encrypted) session cookie is used to just keep track of the scores during a tree navigation.
 
 Since Treenee is not supposed to be directly exposed to the internet but to run behind a nginx server or similar, if you need to run Treenee in a public space with a bit of authentication my suggestion is to use a simple [basic authentication](https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication) managed by the web server itself.
 
@@ -95,7 +95,7 @@ To avoid potential issues during future updates, Treenee will try loading a `./p
 
 When Treenee loads each tree definition, it gives each node's option (when present) a randomly generated identifier and this _id_ is not "stable" across server restarts: when you restart the server, the tree definition are read again and the id are generated anew. The reasons behind it is to avoid issues with browser cache and to be perfectly sure that every option is reached from a unique path and those pages are difficult to "bookmark".
 
-You can actually change this behaviour using the `--stable-ids` server option, so that each option id is generated from the "index" of the array they belong. This is supposed to only be used during development (so that you can actually reload an option page without getting a 404 after a server restart), because those "stable ids" are not really smart and may become messy after several options edits: use with care.
+You can actually change this behavior using the `--stable-ids` server option, so that each option id is generated from the "index" of the array they belong. This is supposed to only be used during development (so that you can actually reload an option page without getting a 404 after a server restart), because those "stable ids" are not really smart and may become messy after several options edits: use with care.
 
 ### Builder mode
 
