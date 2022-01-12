@@ -26,7 +26,7 @@
     "hbs": "^4.1.2",
     "js-yaml": "^3.14.0",
     "lodash": "^4.17.19",
-    "markdown-it": "^11.0.0",
+    "markdown-it": "^12.3.2",
     "mermaid": "^8.5.0"
   },
   "devDependencies": {
