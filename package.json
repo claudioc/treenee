@@ -27,7 +27,7 @@
     "js-yaml": "^3.14.0",
     "lodash": "^4.17.19",
     "markdown-it": "^11.0.0",
-    "mermaid": "^8.5.0"
+    "mermaid": "^9.1.2"
   },
   "devDependencies": {
     "ava": "^3.10.1",
